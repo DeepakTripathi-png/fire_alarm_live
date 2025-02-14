@@ -53,6 +53,23 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
+                            <h4 class="header-title mt-0 mb-4">Clients</h4>
+                            <div class="widget-chart-1">
+                                <div class="widget-chart-box-1 float-start" dir="ltr">
+                                    <i class="mdi mdi-account-multiple text-dark"></i>
+                                </div>
+                                <div class="widget-detail-1 text-end">
+                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
+                                    <p class="text-muted mb-1">Total Clients</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="header-title mt-0 mb-4">Sites</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
@@ -66,11 +83,31 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mt-0 mb-4">Assigned Site
+                            </h4>
+                            <div class="widget-chart-1">
+                                <div class="widget-chart-box-1 float-start" dir="ltr">
+                                    <i class="mdi mdi-clipboard-list text-danger"></i>
+                                </div>
+                                <div class="widget-detail-1 text-end">
+                                    <h2 class="fw-normal pt-2 mb-1"> 100 </h2>
+                                    <p class="text-muted mb-1">Total Assigned Site</p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4"> No of Device</h4>
+                            <h4 class="header-title mt-0 mb-4">Devices</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
                                     <i class="mdi mdi-television"></i>
@@ -89,14 +126,14 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4"> Active Device</h4>
+                            <h4 class="header-title mt-0 mb-4"> Assigned Devices</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
                                     <i class="mdi mdi-clipboard-list text-purple"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
-                                    <p class="text-muted mb-1">Active Device
+                                    <p class="text-muted mb-1">Total Assigned Device</p>
                                     </p>
                                 </div>
                             </div>
@@ -104,39 +141,20 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Inactive Device
-                            </h4>
-                            <div class="widget-chart-1">
-                                <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    {{-- <i class="mdi mdi-warehouse text-danger"></i> --}}
-                                    <i class="mdi mdi-clipboard-list text-danger"></i>
-                                </div>
-                                <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 100 </h2>
-                                    <p class="text-muted mb-1">Inactive Sent
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
 
 
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Total Alerts</h4>
+                            <h4 class="header-title mt-0 mb-4">Total Alarms</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    {{-- <i class="mdi mdi-account-circle text-secondary"></i> --}}
                                     <i class="mdi mdi-alarm-light text-secondary"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 1 </h2>
-                                    <p class="text-muted mb-1">Total Alerts</p>
+                                    <p class="text-muted mb-1">Total Alarms</p>
                                 </div>
                             </div>
                         </div>
@@ -146,15 +164,14 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Fixed Alerts</h4>
+                            <h4 class="header-title mt-0 mb-4">Active Alarms</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    {{-- <i class="mdi mdi-account-check"></i> --}}
-                                    <i class="mdi mdi-alarm-light text-info"></i>
+                                    <i class="mdi mdi-alarm-light text-danger"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 0 </h2>
-                                    <p class="text-muted mb-1">Fixed Alerts</p>
+                                    <p class="text-muted mb-1">Active Alarms</p>
                                 </div>
                             </div>
                         </div>
@@ -164,38 +181,21 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Pending Alerts</h4>
+                            <h4 class="header-title mt-0 mb-4">Acknowledged Alarms</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    {{-- <i class="mdi mdi-cancel"></i> --}}
                                     <i class="mdi mdi-alarm-light text-warning"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
-                                    <p class="text-muted mb-1">Failed</p>
+                                    <p class="text-muted mb-1">Acknowledged Alarms</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title mt-0 mb-4">Active Alerts</h4>
-                            <div class="widget-chart-1">
-                                <div class="widget-chart-box-1 float-start" dir="ltr">
-                                     {{-- <i class="mdi mdi-account-check"></i> --}}
-                                    <i class="mdi mdi-alarm-light text-danger"></i>
-                                </div>
-                                <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
-                                    <p class="text-muted mb-1">Active Alerts</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
 
             </div>
         
@@ -389,7 +389,7 @@
                                     
                                 </tbody>
                             </table>
-                            <button class="show-alert-button" onclick="showAlert()">Show Alert</button>
+                            {{-- <button class="show-alert-button" onclick="showAlert()">Show Alert</button> --}}
                         </div>
                     </div>
 

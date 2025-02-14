@@ -119,29 +119,5 @@
     $(".system-user-list").addClass("menuitem-active");
 </script>
 
-<script>
-    $(document).ready(function() {
-        $("#email").on("keyup", function() {
-            $.ajax({
-                type: "get",
-                url: "{{ url('/admin/system-user/check-user-exist') }}",
-                data: {
-                    email: $(this).val(),
-                    user_id: $("#id").val()
-                },
-                success: function(response) {
-                    if (response.trim() == "true") {
-                        $("#submit-btn").attr("disabled", true);
-                        $("#email_existence_message").removeClass("d-none");
-                        $("#email_existence_message").html("<b>*</b> This Email has already been taken");
-                    } else {
-                        $("#email_existence_message").addClass("d-none");
-                        $("#email_existence_message").html("");
-                        $("#submit-btn").removeAttr("disabled");
-                    }
-                }
-            })
-        })
-    })
-</script>
+
 @endsection

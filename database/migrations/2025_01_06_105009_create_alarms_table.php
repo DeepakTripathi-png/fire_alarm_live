@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('alarms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ioslave_id'); 
-            $table->string('message'); 
-            $table->json('modbus_data')->nullable();
-            $table->enum('alarm_status', ['active', 'acknowledge'])->default('active');
-            $table->string('created_ip_address')->nullable();
-            $table->string('modified_ip_address')->nullable();
-            $table->bigInteger('created_by')->nullable();
-            $table->bigInteger('modified_by')->nullable();
-            $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
+            $table->bigInteger('ioslave_id');  
+            $table->string('message');
+            $table->longText('modbus_data')->nullable();
+            $table->enum('alarm_status', ['active', 'acknowledged'])->default('active');
+            $table->unsignedInteger('occurrences')->default(1);
+            $table->timestamp('last_triggered_at')->useCurrent()->nullable()->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('last_acknowledged_at')->nullable();
             $table->timestamps();
         });
     }

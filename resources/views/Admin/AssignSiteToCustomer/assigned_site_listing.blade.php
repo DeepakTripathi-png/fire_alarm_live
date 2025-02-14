@@ -71,7 +71,7 @@
 @endsection
 
 @section('script')
-<script src="{{ URL::asset('admin_panel\controller_js\cn_assign_device.js')}}"></script>
+<script src="{{ URL::asset('admin_panel\controller_js\cn_assigned_site_listing.js')}}"></script>
     <script>
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");

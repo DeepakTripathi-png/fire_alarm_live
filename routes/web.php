@@ -15,11 +15,13 @@ use App\Http\Controllers\AlertNotificationController;
 use App\Http\Controllers\Admin\Master\DeviceMasterController;
 use App\Http\Controllers\Admin\Master\SiteMasterController;
 use App\Http\Controllers\Admin\Master\SlaveDeviceMasterController;
-use App\Http\Controllers\Admin\Device\DeviceController;
-use App\Http\Controllers\Admin\AssignDevice\AssignDeviceController;
+// use App\Http\Controllers\Admin\Device\DeviceController;
+use App\Http\Controllers\Admin\AssignDeviceToSite\AssigDeviceToSiteController;
+use App\Http\Controllers\Admin\AssignSiteToCustomer\AssignSiteToCustomerController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Admin\IoSlave\IoSlaveController;
+use App\Http\Controllers\Admin\Alarm\AlarmController;
 // End Common Controllers Needed For All Project
 
 // Project Controller Start Here
@@ -74,7 +76,12 @@ Route::get('/test-notification', [AlertNotificationController::class, 'create'])
 // Start Backend Routes
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_admin']], function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+   
+
+    Route::controller(DashboardController::class)->group(function (){
+        Route::get('/dashboard','index')->name('dashboard');
+        Route::get('/dashboard/client_dashboard_data_table','client_dashboard_data_table');
+    });
 
 
     Route::controller(SiteMasterController::class)->group(function () {
@@ -117,16 +124,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
 
 
 
-    Route::controller(DeviceController::class)->group(function (){
-
+    Route::controller(AssigDeviceToSiteController::class)->group(function (){
         Route::get('device', 'index');
-
-         Route::get('/device/add', 'add');
-
+        Route::get('/device/add', 'add');
         Route::post('device/store', 'store')->name('device.store');
         Route::get('device/edit/{id}','edit');
-
-
         Route::get('device/data-table','data_table');
        
     });
@@ -135,7 +137,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
     // Route::view('/device', 'admin.Device.device');
 
 
-    Route::controller(AssignDeviceController::class)->group(function (){
+    Route::controller(AssignSiteToCustomerController::class)->group(function (){
 
         Route::get('assign-site', 'index');
         Route::get('/assign-site/add', 'add');
@@ -145,6 +147,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'is_
       
        
     });
+
+
+
+    Route::controller(AlarmController::class)->group(function (){
+        Route::get('/get-alarms','getAlarmsTriggeredInLastMinute');
+
+      
+       
+    });
+
+
 
 
 

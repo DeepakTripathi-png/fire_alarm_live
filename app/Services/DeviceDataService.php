@@ -126,8 +126,7 @@ class DeviceDataService
                                         $this->updateSlaveDeviceStatus($parsedData,$ioSlave, 'normal');
                                     }
                                 }
-            
-                                // Check for analog inputs
+        
                                 if (strpos($ioSlave->io_slave_name, 'ai') === 0) {
                                     $aiKey = str_replace('ai', 'adc', $ioSlave->io_slave_name) . '_val';
                                     if (!empty($parsedData['analog_input'][$aiKey])) {
@@ -135,7 +134,6 @@ class DeviceDataService
                                     }
                                 }
             
-                                // Check for Modbus data
                                 if (strpos($ioSlave->io_slave_name, 'slave') === 0) {
                                     if (($parsedData['modbus_data']['0x0009'] ?? '') === "0xFFFF") {
                                         $this->updateSlaveDeviceStatus($parsedData,$ioSlave, 'alarm');
@@ -155,33 +153,76 @@ class DeviceDataService
                 
            
             
-            private function updateSlaveDeviceStatus($parsedData, $ioSlave, $status)
-            {
-                if (!empty($ioSlave->slave_device_id)) {
-                    IOSlave::where('slave_device_id', $ioSlave->slave_device_id)
-                        ->update(['io_device_status' => $status]);
+            // private function updateSlaveDeviceStatus($parsedData, $ioSlave, $status)
+            // {
+            //     if (!empty($ioSlave->slave_device_id)) {
+            //         IOSlave::where('slave_device_id', $ioSlave->slave_device_id)
+            //             ->update(['io_device_status' => $status]);
                         
-                    $slaveDeviceDetails = SlaveDeviceMaster::find($ioSlave->slave_device_id);
+            //         $slaveDeviceDetails = SlaveDeviceMaster::find($ioSlave->slave_device_id);
             
-                    if ($status == "alarm"){
+            //         if ($status == "alarm"){
                         
-                        $lastAlarmTime = Alarm::where('ioslave_id', $ioSlave->id)
-                                              ->latest('created_at')  
-                                              ->value('created_at');
+            //             $lastAlarmTime = Alarm::where('ioslave_id', $ioSlave->id)
+            //                                   ->latest('created_at')  
+            //                                   ->value('created_at');
             
-                        $timeThreshold = now()->subSeconds(30);
+            //             $timeThreshold = now()->subSeconds(30);
             
-                        if (!$lastAlarmTime || $lastAlarmTime < $timeThreshold) {
-                            $message = $this->generateAlarmMessage($parsedData, $slaveDeviceDetails);
-                            $input = [
+            //             if (!$lastAlarmTime || $lastAlarmTime < $timeThreshold) {
+            //                 $message = $this->generateAlarmMessage($parsedData, $slaveDeviceDetails);
+            //                 $input = [
+            //                     'ioslave_id' => $ioSlave->id,
+            //                     'message'    => $message,
+            //                 ];
+            //                 Alarm::create($input);  
+            //             }
+            //         }
+            //     }
+            // }
+
+
+
+                private function updateSlaveDeviceStatus($parsedData, $ioSlave, $status)
+                {
+                    if (!empty($ioSlave->slave_device_id)) {
+                        IOSlave::where('slave_device_id', $ioSlave->slave_device_id)
+                            ->update(['io_device_status' => $status]);
+                
+                        $slaveDeviceDetails = SlaveDeviceMaster::find($ioSlave->slave_device_id);
+                
+                        if ($status == "alarm") {
+                            $alarmData = [
                                 'ioslave_id' => $ioSlave->id,
-                                'message'    => $message,
+                                'message'    => $this->generateAlarmMessage($parsedData, $slaveDeviceDetails),
                             ];
-                            Alarm::create($input);  
-                        }
+                
+                            $existingAlarm = Alarm::where('ioslave_id', $ioSlave->id)
+                                ->where('alarm_status', 'active')
+                                ->first();
+                
+                            if ($existingAlarm) {
+                                if (now()->diffInSeconds($existingAlarm->last_triggered_at) >= 10) {
+                                    $existingAlarm->update([
+                                        'last_triggered_at' => now(),
+                                        'occurrences' => $existingAlarm->occurrences + 1,
+                                        'updated_at' => now(),
+                                    ]);
+                                }
+                            } else {
+                                Alarm::create([
+                                    'ioslave_id' => $ioSlave->id,
+                                    'message' => $alarmData['message'],
+                                    'last_triggered_at' => now(),
+                                    'alarm_status' => 'active',
+                                    'created_at' => now(),
+                                    'updated_at' => now(),
+                                ]);
+                            }
+                        } 
                     }
                 }
-            }
+
 
 
                 

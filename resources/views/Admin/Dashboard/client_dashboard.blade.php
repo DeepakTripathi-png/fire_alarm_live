@@ -61,7 +61,7 @@
                                     <i class="mdi mdi-alarm-light text-info"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 0 </h2>
+                                    <h2 class="fw-normal pt-2 mb-1"> {{ $totalAlarmCount }} </h2>
                                     <p class="text-muted mb-1">Total Alarm Count</p>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                     <i class="mdi mdi-alarm-light text-danger"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
+                                    <h2 class="fw-normal pt-2 mb-1"> {{ $totalActiveAlarmCount }} </h2>
                                     <p class="text-muted mb-1">Active Alarm Count</p>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                     <i class="mdi mdi-alarm-light text-warning"></i>
                                 </div>
                                 <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1"> 2 </h2>
+                                    <h2 class="fw-normal pt-2 mb-1"> {{ $totalacknowledgedAlarmCount }} </h2>
                                     <p class="text-muted mb-1">Acknowledged Alaram Count</p>
                                 </div>
                             </div>
@@ -258,7 +258,8 @@
 @endsection
 
 @section('script')
-<script src="{{ URL::asset('admin_panel/controller_js/cn_device_master_view.js')}}"></script>
+<script src="{{ URL::asset('admin_panel/controller_js/cn_client_dashboard.js')}}"></script>
+
     <script>
         $(".system-user").addClass("menuitem-active");
         $(".system-user-list").addClass("menuitem-active");
